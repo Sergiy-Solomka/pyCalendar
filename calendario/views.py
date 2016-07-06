@@ -22,3 +22,7 @@ def get_month_events(request):
             response[item['date'].strftime('%m-%d-%Y')] = item['number_of_events']
 
         return HttpResponse(json.dumps(response))
+
+
+def day_event(request):
+    return render(request, 'calendario/day.html')
