@@ -35,25 +35,27 @@ body {
 }
 
 .arrived_botton {
+    font-size: 25px;
     color: black;
     border-Style : solid;
     border-color: black;
-    border-width: 2px;
+    border-width: 4px;
     background-color: #b7bbc2;
     border-radius: 15px;
     padding: 5px;
     position: relative;
-    right: -72.5%;
+    right: -76%;
 }
 
 .edit_botton {
+    font-size: 25px;
     color: black;
     border-Style : solid;
     border-color: black;
-    border-width: 2px;
+    border-width: 4px;
     background-color: #b7bbc2;
     border-radius: 15px;
     padding: 5px;
     position: relative;
-    right: -72%;
+    right: -75.5%;
 }
