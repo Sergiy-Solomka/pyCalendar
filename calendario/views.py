@@ -24,5 +24,5 @@ def get_month_events(request):
         return HttpResponse(json.dumps(response))
 
 
-def day_event(request):
+def get_day_event(request):
     return render(request, 'calendario/day.html')
