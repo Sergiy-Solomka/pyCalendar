@@ -2,7 +2,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count
-from .models import Event,Booking
+from .models import Booking
 
 
 def index(request):
