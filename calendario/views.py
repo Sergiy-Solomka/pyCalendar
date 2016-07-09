@@ -1,7 +1,9 @@
 import json
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Count
+
+from calendario.forms import PostForm
 from .models import Booking
 
 
@@ -26,3 +28,15 @@ def get_month_bookings(request):
 
 def get_day_events(request):
     return render(request, 'calendario/day.html')
+
+
+def new_booking(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('dayevents')
+    else:
+        form = PostForm()
+    return render(request, 'calendario/new_booking.html', {'form': form})
