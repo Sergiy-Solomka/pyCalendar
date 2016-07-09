@@ -25,6 +25,14 @@ body {
     right: -69%;
 }
 
+#date{
+    color: black;
+    font-size: 40px;
+    margin-left:40%;
+    margin-right:115%;
+    
+    }
+
 .times {
     color: black;
     border-Style : solid;
