@@ -1,10 +1,10 @@
 from django.conf.urls import url
 
-from . import views
+from calendario.views import index, get_day_events, get_month_bookings
 
-app_name = 'calendario'
+
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^getmonthevents', views.get_month_bookings, name='monthevents'),
-    url(r'^getdayevents', views.get_day_events, name='dayevents'),
+    url(r'^$', index, name='index'),
+    url(r'^getmonthevents', get_month_bookings, name='monthevents'),
+    url(r'^getdayevents', get_day_events, name='dayevents'),
 ]
