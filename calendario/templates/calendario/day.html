@@ -7,6 +7,7 @@
     <title>Days </title>
       {% load staticfiles %}
       <link rel="stylesheet" type="text/css" href="{% static 'calendario/css/day.css' %}"/>
+      <script src="{% static 'calendario/js/day.js' %}"></script>
   </head>
   <body>
 
@@ -20,6 +21,7 @@
       <div class = "times">6:00<a class="edit_botton" href="{% url 'new_booking' %}"
                                   onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no, menubar=no,scrollbars=yes,resizable=yes,')
                                   ;return false;">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
+
 
       </br>
        <div class = "times">6:00<a class="edit_botton"href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
