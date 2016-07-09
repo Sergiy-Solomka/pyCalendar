@@ -12,6 +12,18 @@ body {
 	background-size: 100% 100%;
 }
 
+#back_menu{
+    font-size: 25px;
+    color: black;
+    border-Style : solid;
+    border-color: black;
+    border-width: 4px;
+    background-color: #b7bbc2;
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    right: -69%;
+}
 
 .times {
     color: black;
