@@ -1,0 +1,26 @@
+body {
+	background: lightslategray;
+	border: 8px solid #cccccc;
+	border-radius: 10px;
+	height: 550px;
+	width: 350px;
+    font-size: 12px;
+   	 padding: 50px;
+	}
+.post-form {
+	width: 35%;
+	font: 16px Tahoma, Arial, sans-serif;
+  	color: #9b1f50;
+  	outline: none;
+
+	}
+
+.save_button {
+
+
+	}
+
+h1 {
+	font-size: 25px;
+
+}
