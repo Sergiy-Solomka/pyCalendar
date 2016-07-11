@@ -40,3 +40,7 @@ def new_booking(request):
     else:
         form = PostForm()
     return render(request, 'calendario/new_booking.html', {'form': form})
+
+def prueba(request):
+    result = "Sergio Solomka"
+    return render(request, 'calendario/prueba.html', {'result': result})
