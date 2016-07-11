@@ -46,6 +46,6 @@ def prueba(request):
         year = request.GET['year']
         day = request.GET['day']
 
-        result = Booking.objects.filter(date__year=year, date__month=month,date__day=day).values('pax').aggregate(number_of_events=Sum('pax'))
+        result = Booking.objects.filter(date__year=year, date__month=month,date__day=day).values('pax').aggregate(number_pax=Sum('pax'))
 
         return render(request, 'calendario/prueba.html', {'result': result})
