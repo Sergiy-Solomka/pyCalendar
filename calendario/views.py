@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.db.models import Count
+from django.db.models import Count, Sum
 
 from calendario.forms import PostForm
 from .models import Booking
@@ -9,21 +9,6 @@ from .models import Booking
 
 def index(request):
     return render(request, 'calendario/month.html')
-
-
-def get_month_bookings(request):
-    if request.is_ajax():
-        month = request.GET['month']
-        year = request.GET['year']
-
-        result = Booking.objects.filter(date__year=year, date__month=month).values('date').annotate(
-            number_of_events=Count('date'))
-
-        response = {}
-        for item in list(result):
-            response[item['date'].strftime('%m-%d-%Y')] = item['number_of_events']
-
-        return HttpResponse(json.dumps(response))
 
 
 def get_day_events(request):
@@ -41,6 +26,26 @@ def new_booking(request):
         form = PostForm()
     return render(request, 'calendario/new_booking.html', {'form': form})
 
+def get_month_bookings(request):
+    if request.is_ajax():
+        month = request.GET['month']
+        year = request.GET['year']
+
+        result = Booking.objects.filter(date__year=year, date__month=month).values('date').annotate(
+            number_of_events=Count('date'))
+
+        response = {}
+        for item in list(result):
+            response[item['date'].strftime('%m-%d-%Y')] = item['number_of_events']
+
+        return HttpResponse(json.dumps(response))
+
 def prueba(request):
-    result = "Sergio Solomka"
-    return render(request, 'calendario/prueba.html', {'result': result})
+    if not request.is_ajax():
+        month = request.GET['month']
+        year = request.GET['year']
+        day = request.GET['day']
+
+        result = Booking.objects.filter(date__year=year, date__month=month,date__day=day).values('pax').aggregate(number_of_events=Sum('pax'))
+
+        return render(request, 'calendario/prueba.html', {'result': result})
