@@ -25,6 +25,7 @@ def get_day_events(request):
         date_1= total_date[:1]
         date_2=date_1[0]
         date = date_2["date"]
+
         return render(request, 'calendario/day.html', {'result': result,'date': date})
 
 
@@ -35,7 +36,7 @@ def new_booking(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('dayevents')
+            return redirect('index')
     else:
         form = PostForm()
     return render(request, 'calendario/new_booking.html', {'form': form})
