@@ -17,10 +17,16 @@ def get_day_events(request):
         year = request.GET['year']
         day = request.GET['day']
 
-        a = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
+        total_pax = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
             number_pax=Sum('pax'))
-        result = a["number_pax"]
-        return render(request, 'calendario/day.html', {'result': result})
+        result = total_pax["number_pax"]
+
+        total_date = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('date')
+        date_1= total_date[:1]
+        date_2=date_1[0]
+        date = date_2["date"]
+        return render(request, 'calendario/day.html', {'result': result,'date': date})
+
 
 
 def new_booking(request):

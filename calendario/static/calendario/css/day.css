@@ -26,11 +26,17 @@ body {
 }
 
 .date_of_booking{
-    color: white;
+    color: black;
     font-size: 40px;
-    margin-left:100%;
-    
+    margin-left: 35%;
+
     }
+
+.amount_of_pax{
+    color: black;
+    font-size: 35px;
+    margin-left: 37%;
+}
 
 .times {
     color: black;
