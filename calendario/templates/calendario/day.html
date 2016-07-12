@@ -12,9 +12,12 @@
   <body>
 
 
-  <h1></br>
-      </br>
-      <a id="date">24/10/2016 </a>
+
+      {% block content %}
+    <h1>Date :{{ date }}</h1>
+    <h1>Total booked : {{ result }} pax </h1>
+    {% endblock %}
+    <h1></br>
       <a id ="back_menu" href="{% url 'index' %}">BACK TO MONTH</a>
       </br>
       </br>

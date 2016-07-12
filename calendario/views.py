@@ -12,7 +12,15 @@ def index(request):
 
 
 def get_day_events(request):
-    return render(request, 'calendario/day.html')
+    if not request.is_ajax():
+        month = request.GET['month']
+        year = request.GET['year']
+        day = request.GET['day']
+
+        a = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
+            number_pax=Sum('pax'))
+        result = a["number_pax"]
+        return render(request, 'calendario/day.html', {'result': result})
 
 
 def new_booking(request):
