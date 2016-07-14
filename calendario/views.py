@@ -47,11 +47,11 @@ def get_month_bookings(request):
         year = request.GET['year']
 
         result = Booking.objects.filter(date__year=year, date__month=month).values('date').annotate(
-            number_of_events=Count('date'))
+            number_of_bookings=Sum('pax'))
 
         response = {}
         for item in list(result):
-            response[item['date'].strftime('%m-%d-%Y')] = item['number_of_events']
+            response[item['date'].strftime('%m-%d-%Y')] = item['number_of_bookings']
 
         return HttpResponse(json.dumps(response))
 
