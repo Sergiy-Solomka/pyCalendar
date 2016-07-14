@@ -69,7 +69,7 @@
             success: function (json) {
                 var calData = [];
                 $.each(json, function (i, val) {
-                    calData[i] = '<span>' + val + '</span>'
+                    calData[i] = '<span><h1>' + val + '<h1></span>'
                 });
                 cal.setData(calData);
             },
