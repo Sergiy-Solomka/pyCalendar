@@ -44,7 +44,7 @@
 		displayMonthAbbr : false,
 		// left most day in the calendar
 		// 0 - Sunday, 1 - Monday, ... , 6 - Saturday
-		startIn : 1,
+		startIn : 0,
 		onDayClick : function( $el, $content, dateProperties ) { return false; }
 	};
 
