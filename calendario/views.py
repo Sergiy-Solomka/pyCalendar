@@ -54,13 +54,3 @@ def get_month_bookings(request):
             response[item['date'].strftime('%m-%d-%Y')] = item['number_of_bookings']
 
         return HttpResponse(json.dumps(response))
-
-def prueba(request):
-    if not request.is_ajax():
-        month = request.GET['month']
-        year = request.GET['year']
-        day = request.GET['day']
-
-        result = Booking.objects.filter(date__year=year, date__month=month,date__day=day).values('pax').aggregate(number_pax=Sum('pax'))
-
-        return render(request, 'calendario/prueba.html', {'result': result})
