@@ -28,8 +28,10 @@ def get_day_events(request):
             date_1= total_date[:1]
             date_2=date_1[0]
             date = date_2["date"]
+            all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day)
 
-            return render(request, 'calendario/day.html', {'result': result,'date': date})
+
+            return render(request, 'calendario/day.html', {'result': result,'date': date ,'time_booking': all_booking_of_day})
 
 
 
