@@ -23,14 +23,14 @@
       <a id ="back_menu" href="{% url 'index' %}">BACK TO MONTH</a>
       </br>
       </br>
-      <div class = "times">6:00{{ time_booking }}{{ pax_booking }}{{ name_booking }}{{ table_booking }}{{ comment_booking }}<a class="edit_botton" href="{% url 'new_booking' %}"
+      <div class = "times">6:00{{ time_booking }}<a class="edit_botton" href="{% url 'new_booking' %}"
                                   onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
                                   ;return false;">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
 
 
       </br>
-       <div class = "times">6:00<a class="edit_botton"href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
+       <div class = "times">6:00{{ a }}<a class="edit_botton"href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
       </br>
       </br>
        <div class = "times">6:15<a class="edit_botton"href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
