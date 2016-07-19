@@ -28,7 +28,7 @@ def get_day_events(request):
         start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
         hours = [start_time.time()]
 
-        for i in range(0, 15):
+        for i in range(0, 16):
             start_time = start_time + datetime.timedelta(minutes=15)
             hours.append(start_time.time())
 
@@ -39,7 +39,7 @@ def get_day_events(request):
         all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
         return render(request, 'calendario/day.html',
-                      {'result': result, 'date': date, 'time_booking': all_booking_of_day, 'hours': hours})
+                      {'result': result, 'date': date, 'all_booking_of_day': all_booking_of_day, 'hours': hours})
 
 
 def new_booking(request):

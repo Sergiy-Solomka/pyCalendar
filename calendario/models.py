@@ -18,6 +18,8 @@ class Booking(models.Model):
         ('21:00', '21:00'),
         ('21:15', '21:15'),
         ('21:30', '21:30'),
+        ('21:45', '21:45'),
+        ('22:00', '22:00')
         )
     date = models.DateField()
     time = models.CharField(max_length =5,choices=TIME_CHOICES)

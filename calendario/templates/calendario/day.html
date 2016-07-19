@@ -15,16 +15,24 @@
 {% block content %}
     <h1 class="date_of_booking">Date : {{ date }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
+    <h1></br>
+        <a id="back_menu" href="{% url 'index' %}">BACK TO MONTH</a>
+        </br>
+        </br>
+
+    </h1>
 
     {% for hour in hours %}
-        <div class="times">{{ hour|date:"H:i" }} <a class="edit_botton" href="{% url 'new_booking' %}" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
+        <div class="times_of_booking">{{ hour|date:"H:i" }}<a class="add_booking" href="{% url 'new_booking' %}"
+                                                              onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
+                                  ;return false;">ADD BOOKING</a></div>
 
-        {% for booking in time_booking %}
+        {% for booking in all_booking_of_day %}
             {% if hour == booking.time %}
-                <div class="times">Name: {{ booking.name }}. PAX: {{ booking.pax }} </div>
+                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Table: {{ booking.table }}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}<a class="edit_botton">EDIT</a><a
+                            class="arrived_botton">ARRIVED</a></div>
             {% endif %}
         {% endfor %}
 
@@ -34,119 +42,7 @@
     {% endfor %}
 
 
-    <h1></br>
-        <a id="back_menu" href="{% url 'index' %}">BACK TO MONTH</a>
-        </br>
-        </br>
-        <div class="times">6:00{{ time_booking }}<a class="edit_botton" href="{% url 'new_booking' %}"
-                                                    onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
-                                   ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">EDIT</a><a class="arrived_botton">ARRIVED</a></div>
 
-
-        </br>
-        <div class="times">6:00{{ a }}<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a
-                class="arrived_botton">ARRIVED</a></div>
-        </br>
-        </br>
-        <div class="times">6:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">6:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">6:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">6:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">6:45<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">6:45<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">7:00<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">7:00<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">7:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">7:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">7:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">7:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">7:45<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">7:45<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">8:00<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">8:00<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">8:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">8:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">8:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">8:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">8:45<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">8:45<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">9:00<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">9:00<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">9:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">9:15<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        </br>
-        <div class="times">9:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-        </br>
-        <div class="times">9:30<a class="edit_botton" href="{% url 'new_booking' %}">EDIT</a><a class="arrived_botton">ARRIVED</a>
-        </div>
-
-    </h1>
 
 {% endblock %}
 </body>
