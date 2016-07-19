@@ -6,36 +6,40 @@ from django.db.models import Count, Sum
 from calendario.forms import PostForm
 from .models import Booking
 
+import datetime
+
 
 def index(request):
     return render(request, 'calendario/month.html')
 
 
 def get_day_events(request):
-    if not request.is_ajax():
-        month = request.GET['month']
-        year = request.GET['year']
-        day = request.GET['day']
+    month = request.GET['month']
+    year = request.GET['year']
+    day = request.GET['day']
 
-        total_pax = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
-            number_pax=Sum('pax'))
-        result = total_pax["number_pax"]
-        if result == None:
-            return redirect('new_booking')
-        else:
+    total_pax = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
+        number_pax=Sum('pax'))
+    result = total_pax["number_pax"]
+    if result == None:
+        return redirect('new_booking')
+    else:
 
-            total_date = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('date')
-            date_1= total_date[:1]
-            date_2=date_1[0]
-            date = date_2["date"]
-            all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
-            a=all_booking_of_day[0]
+        start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
+        hours = [start_time.time()]
 
+        for i in range(0, 15):
+            start_time = start_time + datetime.timedelta(minutes=15)
+            hours.append(start_time.time())
 
+        total_date = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('date')
+        date_1 = total_date[:1]
+        date_2 = date_1[0]
+        date = date_2["date"]
+        all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
-
-            return render(request, 'calendario/day.html', {'result': result,'date': date ,'time_booking': all_booking_of_day,'a': a})
-
+        return render(request, 'calendario/day.html',
+                      {'result': result, 'date': date, 'time_booking': all_booking_of_day, 'hours': hours})
 
 
 def new_booking(request):
@@ -48,6 +52,7 @@ def new_booking(request):
     else:
         form = PostForm()
     return render(request, 'calendario/new_booking.html', {'form': form})
+
 
 def get_month_bookings(request):
     if request.is_ajax():
