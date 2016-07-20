@@ -12,7 +12,7 @@ body {
 	background-size: 100% 100%;
 }
 
-#back_menu{
+#back_to_month{
     font-size: 25px;
     color: black;
     border-Style : solid;
@@ -22,7 +22,7 @@ body {
     border-radius: 15px;
     padding: 20px;
     position: relative;
-    right: -69%;
+    left: 15%;
 }
 
 .date_of_booking{
