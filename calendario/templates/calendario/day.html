@@ -23,16 +23,15 @@
     </h1>
 
     {% for hour in hours %}
-        <div class="times_of_booking">{{ hour|date:"H:i" }}<a class="add_booking" href="{% url 'new_booking' %}"
+        <div class="times_of_booking">{{ hour|date:"H:i" }}&nbsp;&nbsp;<a class="add_booking" href="{% url 'new_booking' %}"
                                                               onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
                                   ;return false;">ADD</a></div>
 
         {% for booking in all_booking_of_day %}
             {% if hour == booking.time %}
-                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Table: {{ booking.table }}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}<a class="edit_botton">EDIT</a><a
-                            class="arrived_botton">ARRIVED</a></div>
+                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Table: {{ booking.table }}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>
             {% endif %}
         {% endfor %}
 
