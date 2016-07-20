@@ -30,7 +30,7 @@
 
         {% for booking in all_booking_of_day %}
             {% if hour == booking.time %}
-                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton" href="{% url 'post_edit' pk=booking.pk %}">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Table: {{ booking.table }}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>
             {% endif %}
         {% endfor %}

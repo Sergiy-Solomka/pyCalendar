@@ -1,6 +1,6 @@
 import json
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count, Sum
 
 from calendario.forms import PostForm
@@ -67,3 +67,16 @@ def get_month_bookings(request):
             response[item['date'].strftime('%m-%d-%Y')] = item['number_of_bookings']
 
         return HttpResponse(json.dumps(response))
+
+
+def post_edit(request, pk):
+    post = get_object_or_404(Booking, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'calendario/edit_booking.html', {'form': form})
