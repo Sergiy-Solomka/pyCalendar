@@ -25,10 +25,19 @@ def get_day_events(request):
         start_time = start_time + datetime.timedelta(minutes=15)
         hours.append(start_time.time())
 
+    # insertamos total de pax reservados de dia
+    total_pax = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
+        number_pax=Sum('pax'))
+    result = total_pax["number_pax"]
+    if result is None:
+        result = 0
+
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
     return render(request, 'calendario/day.html',
-                  {'all_booking_of_day': all_booking_of_day, 'hours': hours})
+              {'result': result, 'all_booking_of_day': all_booking_of_day, 'hours': hours})
+
+
 def new_booking(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -67,6 +76,7 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'calendario/edit_booking.html', {'form': form})
+
 
 def getsunday(request):
     return render(request, 'calendario/sunday.html')
