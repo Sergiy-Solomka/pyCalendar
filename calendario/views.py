@@ -80,3 +80,6 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'calendario/edit_booking.html', {'form': form})
+
+def getsunday(request):
+    return render(request, 'calendario/sunday.html')
