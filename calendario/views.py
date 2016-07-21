@@ -1,3 +1,4 @@
+import calendar
 import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -34,7 +35,8 @@ def get_day_events(request):
         result = 0
 
     # instertamos fecha de dia
-    date_of_day=(month,day,year)
+    month_1= calendar.month_name[int(month)]
+    date_of_day=(day+' '+month_1+' '+year)
 
 
 
