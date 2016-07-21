@@ -6,6 +6,7 @@ from django.db.models import Count, Sum
 from calendario.forms import PostForm
 from .models import Booking
 
+
 import datetime
 
 
@@ -32,10 +33,15 @@ def get_day_events(request):
     if result is None:
         result = 0
 
+    # instertamos fecha de dia
+    date_of_day=(month,day,year)
+
+
+
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
     return render(request, 'calendario/day.html',
-              {'result': result, 'all_booking_of_day': all_booking_of_day, 'hours': hours})
+              {'result': result,'date_of_day': date_of_day, 'all_booking_of_day': all_booking_of_day, 'hours': hours})
 
 
 def new_booking(request):
