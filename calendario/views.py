@@ -18,30 +18,17 @@ def get_day_events(request):
     year = request.GET['year']
     day = request.GET['day']
 
-    total_pax = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
-        number_pax=Sum('pax'))
-    result = total_pax["number_pax"]
-    if result == None:
-        return redirect('new_booking')
-    else:
+    start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
+    hours = [start_time.time()]
 
-        start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
-        hours = [start_time.time()]
+    for i in range(0, 16):
+        start_time = start_time + datetime.timedelta(minutes=15)
+        hours.append(start_time.time())
 
-        for i in range(0, 16):
-            start_time = start_time + datetime.timedelta(minutes=15)
-            hours.append(start_time.time())
+    all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
-        total_date = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('date')
-        date_1 = total_date[:1]
-        date_2 = date_1[0]
-        date = date_2["date"]
-        all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
-
-        return render(request, 'calendario/day.html',
-                      {'result': result, 'date': date, 'all_booking_of_day': all_booking_of_day, 'hours': hours})
-
-
+    return render(request, 'calendario/day.html',
+                  {'all_booking_of_day': all_booking_of_day, 'hours': hours})
 def new_booking(request):
     if request.method == "POST":
         form = PostForm(request.POST)
