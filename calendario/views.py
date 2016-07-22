@@ -19,6 +19,13 @@ def get_day_events(request):
     month = request.GET['month']
     year = request.GET['year']
     day = request.GET['day']
+    weekday = request.GET['weekday']
+
+    # comprobamos que el dia no sea domingo o lunes
+    if weekday == "0":
+        return redirect('getsunday')
+    if weekday == "1":
+        return redirect('getmonday')
 
     start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
     hours = [start_time.time()]
@@ -88,3 +95,6 @@ def post_edit(request, pk):
 
 def getsunday(request):
     return render(request, 'calendario/sunday.html')
+
+def getmonday(request):
+    return render(request, 'calendario/monday.html')
