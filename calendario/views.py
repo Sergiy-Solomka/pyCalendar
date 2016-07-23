@@ -3,10 +3,10 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count, Sum
+from django import forms
 
 from calendario.forms import PostForm
 from .models import Booking
-
 
 import datetime
 
@@ -35,15 +35,14 @@ def get_day_events(request):
         result = 0
 
     # instertamos fecha de dia
-    month_1= calendar.month_name[int(month)]
-    date_of_day=(day+' '+month_1+' '+year)
-
-
+    month_1 = calendar.month_name[int(month)]
+    date_of_day = (day + ' ' + month_1 + ' ' + year)
 
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
     return render(request, 'calendario/day.html',
-              {'result': result,'date_of_day': date_of_day, 'all_booking_of_day': all_booking_of_day, 'hours': hours})
+                  {'result': result, 'date_of_day': date_of_day, 'all_booking_of_day': all_booking_of_day,
+                   'hours': hours, 'day': day, 'month': month})
 
 
 def new_booking(request):
@@ -54,7 +53,12 @@ def new_booking(request):
             post.save()
             return redirect('index')
     else:
-        form = PostForm()
+        date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
+        hour = request.GET['hour']
+
+        form = PostForm(initial={'date':date})
+
+        # date = datetime.date();
     return render(request, 'calendario/new_booking.html', {'form': form})
 
 
