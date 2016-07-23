@@ -106,15 +106,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'pyCalendarDB.sqlite3'),
-    }
-}
-
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
