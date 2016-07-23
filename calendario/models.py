@@ -51,7 +51,7 @@ class Booking(models.Model):
         ('35', '35'),
     )
     date = models.DateField()
-    time = models.CharField(max_length =8,choices=TIME_CHOICES)
+    time = models.CharField(max_length =5,choices=TIME_CHOICES)
     pax = models.IntegerField(default=0)
     name = models.CharField(default='',max_length=20)
     table = models.CharField(max_length =2,choices=TABLE_CHOICES)

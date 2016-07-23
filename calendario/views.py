@@ -52,7 +52,7 @@ def get_day_events(request):
     return render(request, 'calendario/day.html',
                   {'result': result, 'date_of_day': date_of_day, 'date_for_head': date_for_head,
                    'all_booking_of_day': all_booking_of_day,
-                   'hours': hours, 'day': day, 'month': month})
+                   'hours': hours})
 
 
 def new_booking(request):
