@@ -66,7 +66,7 @@ def new_booking(request):
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
         time = datetime.datetime.strptime(hour, '%H:%M').time()
-        form = PostForm(initial={'date': date, 'time': time , })
+        form = PostForm(initial={'date': date, 'time': time,})
 
         # date = datetime.date();
     return render(request, 'calendario/new_booking.html', {'form': form})
