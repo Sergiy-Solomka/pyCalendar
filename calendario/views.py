@@ -65,7 +65,7 @@ def new_booking(request):
     else:
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
-        time = datetime.datetime.strptime(hour, '%H:%M').time()
+        time = datetime.datetime.strptime(hour, '%H:%M').time().strftime('%H:%M')
         form = PostForm(initial={'date': date, 'time': time,})
 
         # date = datetime.date();
