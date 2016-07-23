@@ -41,8 +41,6 @@ def get_day_events(request):
     if result is None:
         result = 0
 
-    # instertamos fecha de dia en cabezera
-    date_for_head = (day + ' ' + calendar.month_name[int(month)] + ' ' + year)
 
     # fecha de dia para usar depues en reservas nuevas
     date_of_day = (year + '-' + month + '-' + day)
@@ -50,7 +48,7 @@ def get_day_events(request):
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
     return render(request, 'calendario/day.html',
-                  {'result': result, 'date_of_day': date_of_day, 'date_for_head': date_for_head,
+                  {'result': result, 'date_of_day': date_of_day,
                    'all_booking_of_day': all_booking_of_day,
                    'hours': hours,
                    'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})

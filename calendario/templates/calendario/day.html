@@ -13,7 +13,6 @@
 
 
 {% block content %}
-    <h1 class="date_of_booking">Date : {{ date_for_head }}</h1>
     <h1 class="date_of_booking">Date : {{ booking_day|date:"d M Y" }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
 
@@ -33,7 +32,7 @@
 
         {% for booking in all_booking_of_day %}
             {% if hour|date:"H:i" == booking.time %}
-                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton"
+                <div class="each_booking">{{ booking.time }}&nbsp;&nbsp;<a class="edit_botton"
                                                                                       href="{% url 'post_edit' pk=booking.pk %}"
                                                                                       onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
