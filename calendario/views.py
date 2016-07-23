@@ -42,15 +42,16 @@ def get_day_events(request):
         result = 0
 
     # instertamos fecha de dia en cabezera
-    date_for_head =(day+' '+calendar.month_name[int(month)]+' '+year)
+    date_for_head = (day + ' ' + calendar.month_name[int(month)] + ' ' + year)
 
     # fecha de dia para usar depues en reservas nuevas
-    date_of_day = (year+'-'+month+'-'+day)
+    date_of_day = (year + '-' + month + '-' + day)
 
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
     return render(request, 'calendario/day.html',
-                  {'result': result, 'date_of_day': date_of_day, 'date_for_head':date_for_head, 'all_booking_of_day': all_booking_of_day,
+                  {'result': result, 'date_of_day': date_of_day, 'date_for_head': date_for_head,
+                   'all_booking_of_day': all_booking_of_day,
                    'hours': hours, 'day': day, 'month': month})
 
 
@@ -64,8 +65,8 @@ def new_booking(request):
     else:
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
-
-        form = PostForm(initial={'date': date ,'hour':hour})
+        time = datetime.datetime.strptime(hour, '%H:%M').time()
+        form = PostForm(initial={'date': date, 'time': time , })
 
         # date = datetime.date();
     return render(request, 'calendario/new_booking.html', {'form': form})
