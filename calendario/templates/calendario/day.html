@@ -13,7 +13,7 @@
 
 
 {% block content %}
-    <h1 class="date_of_booking">Date : {{ date_of_day }}</h1>
+    <h1 class="date_of_booking">Date : {{ date_of_day}}</h1>
     <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
     <h1></br>
         <a id="back_to_month" href="{% url 'index' %}">BACK TO MONTH</a>
@@ -23,20 +23,16 @@
     </h1>
 
     {% for hour in hours %}
-        <div class="times_of_booking">{{ hour|date:"H:i" }}&nbsp;&nbsp;<a class="add_booking"
-                                                                          href="{% url 'new_booking' %}?date=2016-07-21&hour={{ hour|date:"H:i" }}"
-                                                                          onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
+        <div class="times_of_booking">{{ hour|date:"H:i" }}&nbsp;&nbsp;<a class="add_booking" href="{% url 'new_booking' %}?date=2016-07-21&hour={{  hour|date:"H:i" }}"
+                                                              onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
                                   ;return false;">ADD</a></div>
 
         {% for booking in all_booking_of_day %}
             {% if hour == booking.time %}
-                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton"
-                                                                                      href="{% url 'post_edit' pk=booking.pk %}"
-                                                                                      onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
+                <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton" href="{% url 'post_edit' pk=booking.pk %}"onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  ;return false;">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Table: {{ booking.table }}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>
             {% endif %}
         {% endfor %}

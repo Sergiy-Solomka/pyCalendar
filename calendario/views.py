@@ -3,10 +3,10 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count, Sum
-from django import forms
 
 from calendario.forms import PostForm
 from .models import Booking
+from django import forms
 
 import datetime
 
@@ -19,6 +19,13 @@ def get_day_events(request):
     month = request.GET['month']
     year = request.GET['year']
     day = request.GET['day']
+    weekday = request.GET['weekday']
+
+    # comprobamos que el dia no sea domingo o lunes
+    if weekday == "0":
+        return redirect('getsunday')
+    if weekday == "1":
+        return redirect('getmonday')
 
     start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
     hours = [start_time.time()]
@@ -56,7 +63,7 @@ def new_booking(request):
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
 
-        form = PostForm(initial={'date':date})
+        form = PostForm(initial={'date': date})
 
         # date = datetime.date();
     return render(request, 'calendario/new_booking.html', {'form': form})
@@ -92,3 +99,7 @@ def post_edit(request, pk):
 
 def getsunday(request):
     return render(request, 'calendario/sunday.html')
+
+
+def getmonday(request):
+    return render(request, 'calendario/monday.html')
