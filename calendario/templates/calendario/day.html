@@ -15,7 +15,6 @@
 {% block content %}
     <h1 class="date_of_booking">Date : {{ date_for_head }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
-    {{ all_booking_of_day }}
     <h1></br>
         <a id="back_to_month" href="{% url 'index' %}">BACK TO MONTH</a>
         </br>
@@ -31,7 +30,7 @@
                                   ;return false;">ADD</a></div>
 
         {% for booking in all_booking_of_day %}
-            {% if hour == booking.time %}
+            {% if hour|date:"H:i" == booking.time %}
                 <div class="each_booking">{{ booking.time|date:"H:i" }}&nbsp;&nbsp;<a class="edit_botton"
                                                                                       href="{% url 'post_edit' pk=booking.pk %}"
                                                                                       onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
