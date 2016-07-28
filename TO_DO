@@ -1,27 +1,24 @@
 
-
-1. На главной страничке должно отоброжаться количество человек в резерве, а не количестао EVENTS.
+1.
 2. Столы в будние дни, со вторника по субботу резервируются толь ко один раз..Можно перерезервировать спустя 3 часа.
 3. резервы столов осущисталяются каждые 15 минут,максимум два стола в одно и тоже время.
 4. Кажды стол дожени иметь номер и количество человек для резервы.
-5. возможность групировать столы вместе.
-6. По возможности понедельник отображать как закрытый день
-7. Формат отображения в дне такой:
-    время резервы---количество человек--имя---коментарий--номер стола
-    7:30 pax2  mr.Maricon (b`day)  23
+5.
+6.
+7.
 
 
-class Table(models.Model):
+class Tables(models.Model):
     TABLE_CHOICES = (
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
+        ('01', '01'),
+        ('02', '02'),
+        ('03', '03'),
+        ('04', '04'),
+        ('05', '05'),
         ('105', '105'),
-        ('6', '6'),
-        ('8', '8'),
-        ('9', '9'),
+        ('06', '06'),
+        ('08', '08'),
+        ('09', '09'),
         ('10', '10'),
         ('12', '12'),
         ('14', '14'),
@@ -43,7 +40,42 @@ class Table(models.Model):
         ('34', '34'),
         ('35', '35'),
     )
-    table_number = models.CharField(max_length =3,choices=TABLE_CHOICES)
-    max_pax = models.IntegerField(default=0)
+    max_ocupp = models.IntegerField(default=0)
+    table_number = MultiSelectField(choices=TABLE_CHOICES,
+                                    max_choices=20,
+                                    max_length=30, null=True)
+
+
+class Booking(models.Model):
+    TIME_CHOICES = (
+        ('18:00', '18:00'),
+        ('18:15', '18:15'),
+        ('18:30', '18:30'),
+        ('18:45', '18:45'),
+        ('19:00', '19:00'),
+        ('19:15', '19:15'),
+        ('19:30', '19:30'),
+        ('19:45', '19:45'),
+        ('20:00', '20:00'),
+        ('20:15', '20:15'),
+        ('20:30', '20:30'),
+        ('20:45', '20:45'),
+        ('21:00', '21:00'),
+        ('21:15', '21:15'),
+        ('21:30', '21:30'),
+        ('21:45', '21:45'),
+        ('22:00', '22:00')
+    )
+
+    date = models.DateField()
+    time = models.CharField(max_length=5, choices=TIME_CHOICES)
+    pax = models.IntegerField(default=0)
+    name = models.CharField(default='', max_length=20)
+    table = models.ManyToManyField(Tables)
+    comments = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
+            self.pax) + ' -- Name: ' + self.name + ' -- Table: ' + str(self.table) + ' -- (' + self.comments + ')'
 
 
