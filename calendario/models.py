@@ -4,15 +4,15 @@ from multiselectfield import MultiSelectField
 
 class Booking(models.Model):
     TABLE_CHOICES = (
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
+        ('01', '01'),
+        ('02', '02'),
+        ('03', '03'),
+        ('04', '04'),
+        ('05', '05'),
         ('105', '105'),
-        ('6', '6'),
-        ('8', '8'),
-        ('9', '9'),
+        ('06', '06'),
+        ('08', '08'),
+        ('09', '09'),
         ('10', '10'),
         ('12', '12'),
         ('14', '14'),
@@ -60,7 +60,7 @@ class Booking(models.Model):
     name = models.CharField(default='', max_length=20)
     table = MultiSelectField(choices=TABLE_CHOICES,
                                     max_choices=20,
-                                    max_length=100)
+                                    max_length=30)
     comments = models.TextField(blank=True, null=True)
 
     def __str__(self):
