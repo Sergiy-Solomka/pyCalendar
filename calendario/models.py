@@ -1,4 +1,5 @@
 from django.db import models
+from multiselectfield import MultiSelectField
 
 
 class Booking(models.Model):
@@ -51,14 +52,17 @@ class Booking(models.Model):
         ('21:30', '21:30'),
         ('21:45', '21:45'),
         ('22:00', '22:00')
-        )
+    )
 
     date = models.DateField()
-    time = models.CharField(max_length =5,choices=TIME_CHOICES)
+    time = models.CharField(max_length=5, choices=TIME_CHOICES)
     pax = models.IntegerField(default=0)
-    name = models.CharField(default='',max_length=20)
-    table = models.CharField(max_length =3,choices=TABLE_CHOICES)
-    comments = models.TextField(blank=True,null=True)
+    name = models.CharField(default='', max_length=20)
+    table = MultiSelectField(choices=TABLE_CHOICES,
+                                    max_choices=20,
+                                    max_length=100)
+    comments = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(self.pax) + ' -- Name: ' + self.name + ' -- Table: ' + str(self.table) + ' -- (' + self.comments + ')'
+        return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
+            self.pax) + ' -- Name: ' + self.name + ' -- Table: ' + str(self.table) + ' -- (' + self.comments + ')'
