@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from multiselectfield import MultiSelectField
 
@@ -54,13 +55,17 @@ class Booking(models.Model):
         ('22:00', '22:00')
     )
 
+    def validate_name(self):
+        if True:
+            raise ValidationError(('sex'), code='invalid')
+
     date = models.DateField()
     time = models.CharField(max_length=5, choices=TIME_CHOICES)
     pax = models.IntegerField(default=0)
-    name = models.CharField(default='', max_length=20)
+    name = models.CharField(default='', max_length=20, validators=[validate_name])
     table = MultiSelectField(choices=TABLE_CHOICES,
-                                    max_choices=20,
-                                    max_length=30)
+                             max_choices=20,
+                             max_length=30)
     comments = models.TextField(blank=True, null=True)
 
     def __str__(self):

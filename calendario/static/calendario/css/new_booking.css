@@ -22,10 +22,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 
 .save_button {
 
+
 }
 
 h1 {
     font-size: 25px;
     color: black;
     margin-left: 15%
+}
+
+#id_table{
+    font-size: 30px;
+
 }
