@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Days </title>
+    <title>Bookings for {{ booking_day|date:"d M Y" }}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'calendario/css/day.css' %}"/>
     <script src="{% static 'calendario/js/day.js' %}"></script>
@@ -24,16 +24,16 @@
     </h1>
 
     {% for hour in hours %}
-        <div class="times_of_booking">{{ hour|date:"H:i" }}&nbsp;&nbsp;<a class="add_booking"
-                                                                          href="{% url 'new_booking' %}?date={{ date_of_day }}&hour={{ hour|date:"H:i" }}"
-                                                                          onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
-                                   ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">ADD</a></div>
+        <div class="times_of_booking">
+            {{ hour|date:"H:i" }}&nbsp;&nbsp;
+            <a class="add_booking"
+               href="{% url 'new_booking' %}?date={{ date_of_day }}&hour={{ hour|date:"H:i" }}&returnurl={{ request.get_full_path|urlencode }}">ADD</a>
+        </div>
 
         {% for booking in all_booking_of_day %}
             {% if hour|date:"H:i" == booking.time %}
                 <div class="each_booking">{{ booking.time }}&nbsp;&nbsp;<a class="edit_botton"
-                                                                                      href="{% url 'post_edit' pk=booking.pk %}"
+                                                                                      href="{% url 'booking_edit' pk=booking.pk %}"
                                                                                       onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
                                   ;return false;">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

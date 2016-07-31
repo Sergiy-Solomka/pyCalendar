@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'calendario.apps.CalendarioConfig',
-    'multiselectfield',
+    # 'multiselectfield',
 ]
 
 MIDDLEWARE_CLASSES = [

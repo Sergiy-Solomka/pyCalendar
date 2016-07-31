@@ -1,40 +1,17 @@
-from django.core.exceptions import ValidationError
 from django.db import models
-from multiselectfield import MultiSelectField
+
+
+class Table(models.Model):
+    name = models.CharField(max_length=20)
+    capacity = models.IntegerField()
+    description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return 'Table: ' + self.name + ', Capacity: ' + str(self.capacity) + (
+            ' (' + self.description + ')' if self.description != '' else '')
 
 
 class Booking(models.Model):
-    TABLE_CHOICES = (
-        ('01', '01'),
-        ('02', '02'),
-        ('03', '03'),
-        ('04', '04'),
-        ('05', '05'),
-        ('105', '105'),
-        ('06', '06'),
-        ('08', '08'),
-        ('09', '09'),
-        ('10', '10'),
-        ('12', '12'),
-        ('14', '14'),
-        ('15', '15'),
-        ('115', '115'),
-        ('16', '16'),
-        ('116', '116'),
-        ('17', '17'),
-        ('18', '18'),
-        ('19', '19'),
-        ('20', '20'),
-        ('21', '21'),
-        ('22', '22'),
-        ('23', '23'),
-        ('30', '30'),
-        ('31', '31'),
-        ('32', '32'),
-        ('33', '33'),
-        ('34', '34'),
-        ('35', '35'),
-    )
     TIME_CHOICES = (
         ('18:00', '18:00'),
         ('18:15', '18:15'),
@@ -55,19 +32,22 @@ class Booking(models.Model):
         ('22:00', '22:00')
     )
 
-    def validate_name(self):
-        if True:
-            raise ValidationError(('sex'), code='invalid')
-
     date = models.DateField()
     time = models.CharField(max_length=5, choices=TIME_CHOICES)
     pax = models.IntegerField(default=0)
-    name = models.CharField(default='', max_length=20, validators=[validate_name])
-    table = MultiSelectField(choices=TABLE_CHOICES,
-                             max_choices=20,
-                             max_length=30)
+    name = models.CharField(default='', max_length=20)
+    tables = models.ManyToManyField(Table)
     comments = models.TextField(blank=True, null=True)
 
     def __str__(self):
+        tables = ''
+        first = True
+        for table in self.tables.all():
+            if first:
+                tables = table.name
+                first = False
+            else:
+                tables += ', ' + table.name
+
         return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
-            self.pax) + ' -- Name: ' + self.name + ' -- Table: ' + str(self.table) + ' -- (' + self.comments + ')'
+            self.pax) + ' -- Name: ' + self.name + ' -- Tables: [' + tables + '] -- (' + self.comments + ')'

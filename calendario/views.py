@@ -2,11 +2,10 @@ import calendar
 import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Count, Sum
+from django.db.models import Sum
 
 from calendario.forms import PostForm
 from .models import Booking
-from django import forms
 
 import datetime
 
@@ -41,7 +40,6 @@ def get_day_events(request):
     if result is None:
         result = 0
 
-
     # fecha de dia para usar depues en reservas nuevas
     date_of_day = (year + '-' + month + '-' + day)
 
@@ -60,14 +58,15 @@ def new_booking(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('index')
+            form.save_m2m()  # save model relations (tables)
+            # TODO: make a better redirect
+            return redirect(request.GET.get('returnurl') or 'index')  # redirect to index if no url specified
     else:
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
         time = datetime.datetime.strptime(hour, '%H:%M').time().strftime('%H:%M')
-        form = PostForm(initial={'date': date, 'time': time,})
+        form = PostForm(initial={'date': date, 'time': time})
 
-        # date = datetime.date();
     return render(request, 'calendario/new_booking.html', {'form': form})
 
 
@@ -86,14 +85,15 @@ def get_month_bookings(request):
         return HttpResponse(json.dumps(response))
 
 
-def post_edit(request, pk):
+def booking_edit(request, pk):
     post = get_object_or_404(Booking, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('index')
+            form.save_m2m()
+            return redirect('index')  # TODO: make a better redirect
     else:
         form = PostForm(instance=post)
     return render(request, 'calendario/edit_booking.html', {'form': form})

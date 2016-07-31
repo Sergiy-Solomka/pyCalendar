@@ -1,0 +1,51 @@
+[
+  {
+    "model": "calendario.table",
+    "pk": 1,
+    "fields": {
+      "name": "1",
+      "capacity": 10
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 1,
+    "fields": {
+      "name": "2",
+      "capacity": 2
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 1,
+    "fields": {
+      "name": "5",
+      "capacity": 3
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 2,
+    "fields": {
+      "name": "69",
+      "capacity": 5
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 3,
+    "fields": {
+      "name": "33",
+      "capacity": 3
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 4,
+    "fields": {
+      "name": "sex",
+      "capacity": 2,
+      "description": "Couples only"
+    }
+  }
+]

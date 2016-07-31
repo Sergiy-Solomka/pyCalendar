@@ -6,4 +6,4 @@ from calendario.models import Booking
 class PostForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ('date','time','pax','name','table','comments')
+        fields = ('date', 'time', 'pax', 'name', 'tables', 'comments')
