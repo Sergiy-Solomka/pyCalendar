@@ -1,0 +1,34 @@
+[
+  {
+    "model": "calendario.client",
+    "pk": 1,
+    "fields": {
+      "name": "Sergiy Solomka",
+      "phone": 617262297
+    }
+  },
+  {
+    "model": "calendario.client",
+    "pk": 2,
+    "fields": {
+      "name": "Anton Chmutov",
+      "phone": 1212121212
+    }
+  },
+  {
+    "model": "calendario.client",
+    "pk": 3,
+    "fields": {
+      "name": "Nadia Mirzencu",
+      "phone": 323232323232
+    }
+  },
+  {
+    "model": "calendario.client",
+    "pk": 4,
+    "fields": {
+      "name": "Nastia Chmutova",
+      "phone": 494949494949
+    }
+  }
+]
