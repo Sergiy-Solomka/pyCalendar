@@ -1,5 +1,12 @@
 from django.db import models
 
+class Client(models.Model):
+    name = models.CharField(max_length=20)
+    phone = models.IntegerField()
+
+    def __str__(self):
+        return 'Client: ' + self.name + ', Phone: ' + str(self.phone)
+
 
 class Table(models.Model):
     name = models.CharField(max_length=20)
@@ -35,7 +42,7 @@ class Booking(models.Model):
     date = models.DateField()
     time = models.CharField(max_length=5, choices=TIME_CHOICES)
     pax = models.IntegerField(default=0)
-    name = models.CharField(default='', max_length=20)
+    name = models.ManyToManyField(Client)
     tables = models.ManyToManyField(Table)
     comments = models.TextField(blank=True, null=True)
 
@@ -50,4 +57,4 @@ class Booking(models.Model):
                 tables += ', ' + table.name
 
         return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
-            self.pax) + ' -- Name: ' + self.name + ' -- Tables: [' + tables + '] -- (' + self.comments + ')'
+            self.pax) + ' -- Name: ' + str(Client) + ' -- Tables: [' + tables + '] -- (' + self.comments + ')'
