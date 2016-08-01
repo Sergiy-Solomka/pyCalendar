@@ -3,4 +3,3 @@ from .models import *
 
 admin.site.register(Booking)
 admin.site.register(Table)
-admin.site.register(Client)
