@@ -40,7 +40,8 @@
                     pax: {{ booking.pax }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables:
                     {% for table in booking.tables.all %}
                        [{{ table.name}}]
-                        {% endfor %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>e
+                        {% endfor %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Phone: {{ booking.phone }}</div>e
             {% endif %}
         {% endfor %}
 
