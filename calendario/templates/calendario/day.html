@@ -36,9 +36,11 @@
                                                                                       href="{% url 'booking_edit' pk=booking.pk %}"
                                                                                       onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
                                    ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    pax: {{ booking.pax }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Table: {{ booking.table }}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>
+                                  ;return false;">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    pax: {{ booking.pax }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables:
+                    {% for table in booking.tables.all %}
+                        {{ table.name}}
+                        {% endfor %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>e
             {% endif %}
         {% endfor %}
 
