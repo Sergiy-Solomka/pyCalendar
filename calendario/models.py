@@ -3,7 +3,7 @@ from django.db import models
 
 class Table(models.Model):
     name = models.CharField(max_length=20)
-    capacity = models.IntegerField()
+    capacity = models.PositiveIntegerField()
     description = models.CharField(max_length=255)
 
     def __str__(self):
@@ -34,11 +34,11 @@ class Booking(models.Model):
 
     date = models.DateField()
     time = models.CharField(max_length=5, choices=TIME_CHOICES)
-    pax = models.IntegerField(default=0)
+    pax = models.PositiveIntegerField(default=0)
     name = models.CharField(default='', max_length=20)
     tables = models.ManyToManyField(Table)
     comments = models.TextField(blank=True, null=True)
-    phone = models.IntegerField(blank=True, null=True)
+    phone = models.PositiveIntegerField(null=True, blank=True, default=None)
 
     def __str__(self):
         tables = ''
