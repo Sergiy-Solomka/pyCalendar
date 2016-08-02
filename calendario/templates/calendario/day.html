@@ -39,7 +39,7 @@
                                   ;return false;">EDIT</a>&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     pax: {{ booking.pax }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables:
                     {% for table in booking.tables.all %}
-                        {{ table.name}}
+                       [{{ table.name}}]
                         {% endfor %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {{ booking.comments }}</div>e
             {% endif %}
         {% endfor %}
