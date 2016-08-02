@@ -38,6 +38,7 @@ class Booking(models.Model):
     name = models.CharField(default='', max_length=20)
     tables = models.ManyToManyField(Table)
     comments = models.TextField(blank=True, null=True)
+    phone = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         tables = ''
@@ -50,4 +51,5 @@ class Booking(models.Model):
                 tables += ', ' + table.name
 
         return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
-            self.pax) + ' -- Name: ' + self.name + ' -- Tables: [' + tables + '] -- (' + self.comments + ')'
+            self.pax) + ' -- Name: ' + self.name + ' -- Tables: [' + tables + '] -- (' + self.comments + ')' + ' -- Phone: ' + str(
+            self.phone)
