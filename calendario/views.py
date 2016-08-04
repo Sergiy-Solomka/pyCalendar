@@ -51,7 +51,7 @@ def get_day_events(request):
     tables_booked_2 = [f['tables'] for f in tables_booked]
 
     vacancy_1 = list(set(tables_list_2) - set(tables_booked_2))
-    vacancy = sorted(vacancy_1,key=int)
+    vacancy = sorted(vacancy_1, key=int)
 
     # fecha de dia para usar depues en reservas nuevas
     date_of_day = (year + '-' + month + '-' + day)

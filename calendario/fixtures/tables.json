@@ -36,7 +36,15 @@
     "pk": 5,
     "fields": {
       "name": "5",
-      "capacity": 4
+      "capacity": 2
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 105,
+    "fields": {
+      "name": "105",
+      "capacity": 2
     }
   },
   {
@@ -49,7 +57,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 7,
+    "pk": 8,
     "fields": {
       "name": "8",
       "capacity": 2
@@ -57,7 +65,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 8,
+    "pk": 9,
     "fields": {
       "name": "9",
       "capacity": 2
@@ -65,7 +73,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 9,
+    "pk": 10,
     "fields": {
       "name": "10",
       "capacity": 2
@@ -73,7 +81,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 10,
+    "pk": 12,
     "fields": {
       "name": "12",
       "capacity": 5
@@ -81,7 +89,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 11,
+    "pk": 14,
     "fields": {
       "name": "14",
       "capacity": 4
@@ -89,7 +97,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 12,
+    "pk": 15,
     "fields": {
       "name": "15",
       "capacity": 6
@@ -97,33 +105,17 @@
   },
   {
     "model": "calendario.table",
-    "pk": 13,
-    "fields": {
-      "name": "16",
-      "capacity": 4
-    }
-  },
-  {
-    "model": "calendario.table",
-    "pk": 14,
-    "fields": {
-      "name": "17",
-      "capacity": 2
-    }
-  },
-  {
-    "model": "calendario.table",
-    "pk": 15,
-    "fields": {
-      "name": "18",
-      "capacity": 2
-    }
-  },
-  {
-    "model": "calendario.table",
     "pk": 16,
     "fields": {
-      "name": "19",
+      "name": "16",
+      "capacity": 2
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 116,
+    "fields": {
+      "name": "116",
       "capacity": 2
     }
   },
@@ -131,15 +123,15 @@
     "model": "calendario.table",
     "pk": 17,
     "fields": {
-      "name": "20",
-      "capacity": 4
+      "name": "17",
+      "capacity": 2
     }
   },
   {
     "model": "calendario.table",
     "pk": 18,
     "fields": {
-      "name": "21",
+      "name": "18",
       "capacity": 2
     }
   },
@@ -147,7 +139,7 @@
     "model": "calendario.table",
     "pk": 19,
     "fields": {
-      "name": "22",
+      "name": "19",
       "capacity": 2
     }
   },
@@ -155,15 +147,15 @@
     "model": "calendario.table",
     "pk": 20,
     "fields": {
-      "name": "23",
-      "capacity": 2
+      "name": "20",
+      "capacity": 4
     }
   },
   {
     "model": "calendario.table",
     "pk": 21,
     "fields": {
-      "name": "30",
+      "name": "21",
       "capacity": 2
     }
   },
@@ -171,7 +163,7 @@
     "model": "calendario.table",
     "pk": 22,
     "fields": {
-      "name": "31",
+      "name": "22",
       "capacity": 2
     }
   },
@@ -179,13 +171,37 @@
     "model": "calendario.table",
     "pk": 23,
     "fields": {
+      "name": "23",
+      "capacity": 2
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 30,
+    "fields": {
+      "name": "30",
+      "capacity": 2
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 31,
+    "fields": {
+      "name": "31",
+      "capacity": 2
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 32,
+    "fields": {
       "name": "32",
       "capacity": 2
     }
   },
   {
     "model": "calendario.table",
-    "pk": 24,
+    "pk": 33,
     "fields": {
       "name": "33",
       "capacity": 2
@@ -193,7 +209,7 @@
   },
   {
     "model": "calendario.table",
-    "pk": 25,
+    "pk": 34,
     "fields": {
       "name": "34",
       "capacity": 2
