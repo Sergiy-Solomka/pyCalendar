@@ -6,6 +6,7 @@ from django.db.models import Sum
 
 from calendario.forms import PostForm
 from .models import Booking
+from .models import Table
 
 import datetime
 
@@ -40,6 +41,18 @@ def get_day_events(request):
     if result is None:
         result = 0
 
+    # List of tables what still avelible for boking
+
+    tables_list = list(Table.objects.all().values('name'))
+    tables_list_2 =[f['name'] for f in tables_list]
+    tables_list_2 = [int(i) for i in tables_list_2]
+
+    tables_booked  = list(Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('tables'))
+    tables_booked_2 = [f['tables'] for f in tables_booked]
+
+
+    vacancy = list(set(tables_list_2) - set(tables_booked_2))
+
     # fecha de dia para usar depues en reservas nuevas
     date_of_day = (year + '-' + month + '-' + day)
 
@@ -48,7 +61,7 @@ def get_day_events(request):
     return render(request, 'calendario/day.html',
                   {'result': result, 'date_of_day': date_of_day,
                    'all_booking_of_day': all_booking_of_day,
-                   'hours': hours,
+                   'hours': hours, 'vacancy': vacancy,
                    'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
 
 

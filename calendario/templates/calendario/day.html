@@ -15,6 +15,9 @@
 {% block content %}
     <h1 class="date_of_booking">Date : {{ booking_day|date:"d M Y" }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
+    <h1 class="vacancy_tables">Vacancy : {{ vacancy }} </h1>
+
+
 
     <h1></br>
         <a id="back_to_month" href="{% url 'index' %}">BACK TO MONTH</a>
