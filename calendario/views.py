@@ -44,14 +44,14 @@ def get_day_events(request):
     # List of tables what still avelible for boking
 
     tables_list = list(Table.objects.all().values('name'))
-    tables_list_2 =[f['name'] for f in tables_list]
+    tables_list_2 = [f['name'] for f in tables_list]
     tables_list_2 = [int(i) for i in tables_list_2]
 
-    tables_booked  = list(Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('tables'))
+    tables_booked = list(Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('tables'))
     tables_booked_2 = [f['tables'] for f in tables_booked]
 
-
-    vacancy = list(set(tables_list_2) - set(tables_booked_2))
+    vacancy_1 = list(set(tables_list_2) - set(tables_booked_2))
+    vacancy = sorted(vacancy_1,key=int)
 
     # fecha de dia para usar depues en reservas nuevas
     date_of_day = (year + '-' + month + '-' + day)
