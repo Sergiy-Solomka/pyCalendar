@@ -25,7 +25,8 @@ def get_day_events(request):
     if weekday == "0":
         return render(request, 'calendario/sunday.html',
                       {'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
-        return redirect('getmonday')
+    if weekday == "1":
+        return render(request, 'calendario/monday.html')
 
     start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
     hours = [start_time.time()]
