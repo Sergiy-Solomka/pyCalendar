@@ -23,8 +23,8 @@ def get_day_events(request):
 
     # comprobamos que el dia no sea domingo o lunes
     if weekday == "0":
-        return redirect('getsunday')
-    if weekday == "1":
+        return render(request, 'calendario/sunday.html',
+                      {'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
         return redirect('getmonday')
 
     start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
@@ -111,25 +111,6 @@ def booking_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'calendario/edit_booking.html', {'form': form})
 
-
-def getsunday(request):
-    month = request.GET['month']
-    year = request.GET['year']
-    day = request.GET['day']
-    weekday = request.GET['weekday']
-
-    # insertamos total de pax reservados de dia
-    total_pax = Booking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
-        number_pax=Sum('pax'))
-    result = total_pax["number_pax"]
-    if result is None:
-        result = 0
-
-    all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
-
-    return render(request, 'calendario/sunday.html',
-                  {'result': result, 'all_booking_of_day': all_booking_of_day,
-                   'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
 
 
 def getmonday(request):
