@@ -8,6 +8,5 @@ urlpatterns = [
     url(r'^getdayevents', get_day_events, name='dayevents'),
     url(r'^newbooking', new_booking, name='new_booking'),
     url(r'^booking/(?P<pk>\d+)/edit/$', booking_edit, name='booking_edit'),
-    url(r'^getmonday', getmonday, name='getmonday'),
 
 ]
