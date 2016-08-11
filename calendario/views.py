@@ -60,7 +60,8 @@ def get_day_events(request):
 
                       ]
 
-    closed_days = []
+    days_off = ['Monday']
+
     for i in hollydays_days:
         if i == date_of_day:
             return render(request, 'calendario/hollydays.html')
@@ -70,8 +71,10 @@ def get_day_events(request):
                       {'result': result, 'date_of_day': date_of_day,
                        'all_booking_of_day': all_booking_of_day,
                        'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
-    if weekdayname == "Monday":
-        return render(request, 'calendario/monday.html')
+
+    for i in days_off:
+        if i == weekdayname:
+            return render(request, 'calendario/dayoff.html')
 
     return render(request, 'calendario/day.html',
                   {'result': result, 'date_of_day': date_of_day,
