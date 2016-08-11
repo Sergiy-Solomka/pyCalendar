@@ -52,19 +52,34 @@ def get_day_events(request):
 
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
-    # comprobamos que el dia no sea domingo o lunes o dia de vacaciones
+    # Vamos comprobar que los dias no sean dias libres o dias de vacaciones y  idas de exepciones
     hollydays_days = ['2017-1-1',  # 1st of Jan
                       '2016-12-26',  # Boxing day
                       '2016-8-22', '2016-8-23', '2016-8-24', '2016-8-25', '2016-8-26', '2016-8-27', '2016-8-28'
                       # Rest Hollydays
-
                       ]
-
-    days_off = ['Monday']
 
     for i in hollydays_days:
         if i == date_of_day:
             return render(request, 'calendario/hollydays.html')
+
+    days_off = ['Monday']
+
+    for i in days_off:
+        if i == weekdayname:
+            return render(request, 'calendario/dayoff.html')
+
+    # Dias cuando estemos abiertos aun que sea dia libre.
+    exeption_days = ['2017-12-31',  # New year
+                     '2017-2-14',  # San Valentin
+                     ]
+    for i in exeption_days:
+        if i == date_of_day:
+            return render(request, 'calendario/day.html',
+                          {'result': result, 'date_of_day': date_of_day,
+                           'all_booking_of_day': all_booking_of_day,
+                           'hours': hours, 'vacancy': vacancy,
+                           'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
 
     if weekdayname == "Sunday":
         return render(request, 'calendario/sunday.html',
@@ -72,9 +87,6 @@ def get_day_events(request):
                        'all_booking_of_day': all_booking_of_day,
                        'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
 
-    for i in days_off:
-        if i == weekdayname:
-            return render(request, 'calendario/dayoff.html')
 
     return render(request, 'calendario/day.html',
                   {'result': result, 'date_of_day': date_of_day,
