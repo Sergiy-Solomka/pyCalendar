@@ -19,7 +19,7 @@ def get_day_events(request):
     month = request.GET['month']
     year = request.GET['year']
     day = request.GET['day']
-    weekday = request.GET['weekday']
+    weekdayname = request.GET['weekdayname']
 
     start_time = datetime.datetime(100, 1, 1, 18, 00, 00)
     hours = [start_time.time()]
@@ -53,22 +53,24 @@ def get_day_events(request):
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
 
     # comprobamos que el dia no sea domingo o lunes o dia de vacaciones
-    closing_days = ['2017-1-1',  # 1st of Jan
-                    '2016-12-26',  # Boxing day
-                    '2016-8-22', '2016-8-23', '2016-8-24', '2016-8-25', '2016-8-26', '2016-8-27', '2016-8-28'
-                    # Rest Hollydays
+    hollydays_days = ['2017-1-1',  # 1st of Jan
+                      '2016-12-26',  # Boxing day
+                      '2016-8-22', '2016-8-23', '2016-8-24', '2016-8-25', '2016-8-26', '2016-8-27', '2016-8-28'
+                      # Rest Hollydays
 
-                    ]
-    for i in closing_days:
+                      ]
+
+    closed_days = []
+    for i in hollydays_days:
         if i == date_of_day:
             return render(request, 'calendario/hollydays.html')
 
-    if weekday == "0":
+    if weekdayname == "Sunday":
         return render(request, 'calendario/sunday.html',
                       {'result': result, 'date_of_day': date_of_day,
                        'all_booking_of_day': all_booking_of_day,
                        'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
-    if weekday == "1":
+    if weekdayname == "Monday":
         return render(request, 'calendario/monday.html')
 
     return render(request, 'calendario/day.html',

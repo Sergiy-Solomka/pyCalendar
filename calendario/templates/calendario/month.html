@@ -37,7 +37,7 @@
                     onDayClick: function ($el, $contentEl, dateProperties) {
                         for (var key in dateProperties) {
                             console.log(key + ' = ' + dateProperties[key]);
-                            window.location = "getdayevents?day="+(dateProperties["day"] )+ "&month="+(dateProperties["month"] )+ "&year="+(dateProperties["year"])+ "&weekday="+(dateProperties["weekday"]);
+                            window.location = "getdayevents?day="+(dateProperties["day"] )+ "&month="+(dateProperties["month"] )+ "&year="+(dateProperties["year"])+ "&weekdayname="+(dateProperties["weekdayname"]);
 
                         }
                     }
