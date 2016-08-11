@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Days </title>
+    <title>Bookings for {{ booking_day|date:"d M Y" }}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'calendario/css/sunday.css' %}"/>
     <script src="{% static 'calendario/js/day.js' %}"></script>
@@ -13,7 +13,7 @@
 
 
 {% block content %}
-    <h1 class="date_of_booking">Date : {{ date }}</h1>
+    <h1 class="date_of_booking">Date : {{ booking_day|date:"d M Y" }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
 
 
@@ -23,10 +23,7 @@
         </br>
         </br>
         <h1 class="date_of_booking">FIRST SITTING</h1>
-        <div class="times_of_booking">13:00{{ time_booking }}<a class="add_booking" href="{% url 'new_booking' %}"
-                                                                onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
-                                   ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">EDIT</a> Table: 01
+        <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 01
         </div>
         </br>
         <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 02
