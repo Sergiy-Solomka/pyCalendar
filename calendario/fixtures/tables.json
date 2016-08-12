@@ -214,5 +214,13 @@
       "name": "34",
       "capacity": 2
     }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 100,
+    "fields": {
+      "name": "1000",
+      "capacity": 100
+    }
   }
 ]
