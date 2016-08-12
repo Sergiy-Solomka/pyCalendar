@@ -114,6 +114,23 @@ def new_booking(request):
 
     return render(request, 'calendario/new_booking.html', {'form': form})
 
+def new_booking_sunday(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            form.save_m2m()  # save model relations (tables)
+            # TODO: make a better redirect
+            return redirect(request.GET.get('returnurl') or 'index')  # redirect to index if no url specified
+    else:
+        date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
+        hour = request.GET['hour']
+        time = datetime.datetime.strptime(hour, '%H:%M').time().strftime('%H:%M')
+        form = PostForm(initial={'date': date, 'time': time})
+
+    return render(request, 'calendario/new_booking.html', {'form': form})
+
 
 def get_month_bookings(request):
     if request.is_ajax():
