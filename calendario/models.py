@@ -53,3 +53,39 @@ class Booking(models.Model):
         return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
             self.pax) + ' -- Name: ' + self.name + ' -- Tables: [' + tables + '] -- (' + self.comments + ')' + ' -- Phone: ' + str(
             self.phone)
+
+class SundayBooking(models.Model):
+    TIME_CHOICES = (
+        ('13:00', '13:00'),
+        ('13:15', '13:15'),
+        ('13:30', '13:30'),
+        ('13:45', '13:45'),
+        ('14:00', '14:00'),
+        ('15:30', '15:30'),
+        ('15:45', '15:45'),
+        ('16:00', '16:00'),
+        ('16:15', '16:15'),
+        ('16:30', '16:30')
+    )
+
+    date = models.DateField()
+    time = models.CharField(max_length=5, choices=TIME_CHOICES)
+    pax = models.PositiveIntegerField(default=0)
+    name = models.CharField(default='', max_length=20)
+    tables = models.ManyToManyField(Table)
+    comments = models.TextField(blank=True, null=True)
+    phone = models.PositiveIntegerField(null=True, blank=True, default=None)
+
+    def __str__(self):
+        tables = ''
+        first = True
+        for table in self.tables.all():
+            if first:
+                tables = table.name
+                first = False
+            else:
+                tables += ', ' + table.name
+
+        return str(self.date) + ' -- ' + str(self.time) + ' -- Pax: ' + str(
+            self.pax) + ' -- Name: ' + self.name + ' -- Tables: [' + tables + '] -- (' + self.comments + ')' + ' -- Phone: ' + str(
+            self.phone)
