@@ -5,8 +5,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 
 from calendario.forms import PostForm
+from calendario.forms import PostFormSunday
 from .models import Booking
 from .models import Table
+from .models import SundayBooking
 
 import datetime
 
@@ -114,9 +116,10 @@ def new_booking(request):
 
     return render(request, 'calendario/new_booking.html', {'form': form})
 
+
 def new_booking_sunday(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostFormSunday(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
@@ -127,7 +130,7 @@ def new_booking_sunday(request):
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
         time = datetime.datetime.strptime(hour, '%H:%M').time().strftime('%H:%M')
-        form = PostForm(initial={'date': date, 'time': time})
+        form = PostFormSunday(initial={'date': date, 'time': time})
 
     return render(request, 'calendario/new_booking.html', {'form': form})
 

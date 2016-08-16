@@ -26,7 +26,7 @@
         <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour=13:00&returnurl={{ request.get_full_path|urlencode }}">NEW</a> Table: 01
         </div>
         </br>
-        <div class="times_of_booking">13:00 <a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>Table: 02
+        <div class="times_of_booking">13:00 <a class="add_booking" href="{% url 'new_booking' %}?date={{ date_of_day }}&hour=13:00&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>Table: 02
         </div>
         </br>
         <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 03
