@@ -148,11 +148,15 @@ def get_month_bookings(request):
         month = request.GET['month']
         year = request.GET['year']
 
-        result = Booking.objects.filter(date__year=year, date__month=month).values('date').annotate(
+        result_week = Booking.objects.filter(date__year=year, date__month=month).values('date').annotate(
+            number_of_bookings=Sum('pax'))
+        result_sunday = SundayBooking.objects.filter(date__year=year, date__month=month).values('date').annotate(
             number_of_bookings=Sum('pax'))
 
         response = {}
-        for item in list(result):
+        for item in list(result_week):
+            response[item['date'].strftime('%m-%d-%Y')] = item['number_of_bookings']
+        for item in list(result_sunday):
             response[item['date'].strftime('%m-%d-%Y')] = item['number_of_bookings']
 
         return HttpResponse(json.dumps(response))
