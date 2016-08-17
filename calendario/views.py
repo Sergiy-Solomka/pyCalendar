@@ -112,7 +112,8 @@ def new_booking_sunday(request):
         date = datetime.datetime.strptime(request.GET['date'], "%Y-%m-%d").date()
         hour = request.GET['hour']
         time = datetime.datetime.strptime(hour, '%H:%M').time().strftime('%H:%M')
-        form = PostFormSunday(initial={'date': date, 'time': time})
+        tables = request.GET['table']
+        form = PostFormSunday(initial={'date': date, 'time': time, 'tables': tables})
 
     return render(request, 'calendario/new_booking.html', {'form': form})
 
