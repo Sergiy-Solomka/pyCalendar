@@ -9,5 +9,4 @@ urlpatterns = [
     url(r'^newbooking', new_booking, name='new_booking'),
     url(r'^newbookingsunday', new_booking_sunday, name='new_booking_sunday'),
     url(r'^booking/(?P<pk>\d+)/edit/$', booking_edit, name='booking_edit'),
-
 ]
