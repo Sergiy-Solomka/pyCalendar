@@ -14,8 +14,9 @@
 
 {% block content %}
     <h1 class="date_of_booking">Date : {{ booking_day|date:"d M Y" }}</h1>
-    <h1 class="amount_of_pax">Booked : {{ result }} pax </h1>
+    <h1 class="amount_of_pax">Booked : {{ result_sunday }} pax </h1>
 
+{{all_booking_of_sunday }}
 
 
     <h1></br>
