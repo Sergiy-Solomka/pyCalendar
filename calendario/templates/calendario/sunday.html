@@ -17,7 +17,12 @@
     <h1 class="amount_of_pax">Booked : {{ result_sunday }} pax </h1>
 
 {{all_booking_of_sunday }}
-
+    {% for booking in all_booking_of_sunday %}
+        {{ booking.time }};;;;;{{ booking.pax }}&nbsp;
+        {% for table in booking.tables.all %}
+            [{{ table.name }}]
+        {% endfor %}
+    {% endfor %} &nbsp;
 
     <h1></br>
         <a id="back_to_month" href="{% url 'index' %}">BACK TO MONTH</a>
