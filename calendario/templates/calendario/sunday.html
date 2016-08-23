@@ -15,27 +15,33 @@
 {% block content %}
     <h1 class="date_of_booking">Date : {{ booking_day|date:"d M Y" }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result_sunday }} pax </h1>
-    {{ sunday_bookings }}
-
-</br>
-    {% for x in sunday_bookings %}
-        {{ x.0 }}, {{ x.1 }} -
-        {% for booking in all_booking_of_sunday %}
-            {% for table in booking.tables.all %}
-                {% if table.id == x.1  %}
-                    {{ booking.time }};{{ booking.pax }}&nbsp;[{{ table.name }}]&nbsp;{{ booking.name }}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-</br></br></br>
-    {% endfor %}
-
-
     <h1></br>
         <a id="back_to_month" href="{% url 'index' %}">BACK TO MONTH</a>
         </br>
         </br>
         <h1 class="date_of_booking">FIRST SITTING</h1>
+
+        </br>
+        {% for x in sunday_bookings %}
+            <div class="times_of_booking">{{ x.0 }}&nbsp;<a class="add_booking"
+                                                            href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour={{ x.0 }}&table={{ x.1 }}&returnurl={{ request.get_full_path|urlencode }}">NEW</a>&nbsp;Table: {{ x.1 }}
+            </div>
+            {% for booking in all_booking_of_sunday %}
+                {% for table in booking.tables.all %}
+                    {% if table.id == x.1 %}
+                        <div class="times_of_booking">
+                            {{ booking.time }}&nbsp;<a
+                                class="add_booking"
+                                href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour={{ x.0 }}&table={{ x.1 }}&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>&nbsp;Table: {{ x.1 }}&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}&nbsp;&nbsp;Pax:&nbsp;{{ booking.pax }}&nbsp;&nbsp;&nbsp;{{ booking.comments }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ booking.phone }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </br></br></br>
+        {% endfor %}
+
+
+
         <div class="times_of_booking">13:00<a class="add_booking"
                                               href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour=13:00&table=01&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>
             Table: 01
@@ -45,207 +51,7 @@
                                                href="{% url 'new_booking' %}?date={{ date_of_day }}&hour=13:00&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>Table:
             02
         </div>
-        </br>
-        <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 03
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 04
-        </div>
-        </br>
-        <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 05
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 105
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 06
-        </div>
-        </br>
-        <div class="times_of_booking">13:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 08
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 09
-        </div>
-        </br>
-        <div class="times_of_booking">13:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 10
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 12
-        </div>
-        </br>
-        <div class="times_of_booking">13:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 14
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 15
-        </div>
-        </br>
-        <div class="times_of_booking">13:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 115
-        </div>
-        </br>
-        <div class="times_of_booking">13:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 16
-        </div>
-        </br>
-        <div class="times_of_booking">13:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 116
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 17
-        </div>
-        </br>
-        <div class="times_of_booking">13:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 18
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">13:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 19
-        </div>
-        </br>
-        <div class="times_of_booking">13:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 20
-        </div>
-        </br>
-        <div class="times_of_booking">14:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 21
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">14:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 22
-        </div>
-        </br>
-        <div class="times_of_booking">14:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 23
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">TIME<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 30
-        </div>
-        </br>
-        <div class="times_of_booking">TIME<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 31
-        </div>
-        </br>
-        <div class="times_of_booking">TIME<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 32
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">TIME<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 33
-        </div>
-        </br>
-        <div class="times_of_booking">TIME<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 34
-        </div>
-        </br>
-        </br>
-        <h1 class="date_of_booking">SECOND SITTING</h1>
-        <div class="times_of_booking">15:30{{ time_booking }}<a class="add_booking" href="{% url 'new_booking' %}"
-                                                                onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,' +
-                                   ' menubar=no,scrollbars=yes,resizable=no, height =700, width = 500')
-                                  ;return false;">EDIT</a> Table: 01
-        </div>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 02
-        </div>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 03
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">15:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 04
-        </div>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 05
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 105
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 06
-        </div>
-        </br>
-        <div class="times_of_booking">15:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 08
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 09
-        </div>
-        </br>
-        <div class="times_of_booking">15:45<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 10
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">16:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 12
-        </div>
-        </br>
-        <div class="times_of_booking">16:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 14
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">16:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 15
-        </div>
-        </br>
-        <div class="times_of_booking">16:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 115
-        </div>
-        </br>
-        <div class="times_of_booking">16:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 16
-        </div>
-        </br>
-        <div class="times_of_booking">16:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 116
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">16:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 17
-        </div>
-        </br>
-        <div class="times_of_booking">16:15<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 18
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">16:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 19
-        </div>
-        </br>
-        <div class="times_of_booking">16:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 20
-        </div>
-        </br>
-        <div class="times_of_booking">16:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 21
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">16:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 22
-        </div>
-        </br>
-        <div class="times_of_booking">16:30<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 23
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">TIME+2.5 horas<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 30
-        </div>
-        </br>
-        <div class="times_of_booking">TIME+2.5 horas<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 31
-        </div>
-        </br>
-        <div class="times_of_booking">TIME+2.5 horas<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 32
-        </div>
-        </br>
-        </br>
-        <div class="times_of_booking">TIME+2.5 horas<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 33
-        </div>
-        </br>
-        <div class="times_of_booking">TIME+2.5 horas<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a>
-            Table: 34
-        </div>
-        </br>
-        </br>
+
     </h1>
 
 {% endblock %}

@@ -100,7 +100,15 @@
     "pk": 15,
     "fields": {
       "name": "15",
-      "capacity": 6
+      "capacity": 4
+    }
+  },
+  {
+    "model": "calendario.table",
+    "pk": 115,
+    "fields": {
+      "name": "115",
+      "capacity": 2
     }
   },
   {
