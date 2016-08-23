@@ -13,6 +13,7 @@ from .models import SundayBooking
 import datetime
 
 
+
 def index(request):
     return render(request, 'calendario/month.html')
 
@@ -67,7 +68,8 @@ def get_day_events(request):
     date_of_day = (year + '-' + month + '-' + day)
 
     all_booking_of_day = Booking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
-    all_booking_of_sunday = SundayBooking.objects.filter(date__year=year, date__month=month, date__day=day).order_by('time')
+    all_booking_of_sunday = SundayBooking.objects.filter(date__year=year, date__month=month, date__day=day).order_by(
+        'time')
 
     # Vamos comprobar que los dias no sean dias libres o dias de vacaciones y  idas de exepciones
 
@@ -89,14 +91,23 @@ def get_day_events(request):
 
     if weekdayname == "Sunday":
         # insertamos total de pax reservados de sunday
-        total_pax_sunday = SundayBooking.objects.filter(date__year=year, date__month=month, date__day=day).values('pax').aggregate(
+        total_pax_sunday = SundayBooking.objects.filter(date__year=year, date__month=month, date__day=day).values(
+            'pax').aggregate(
             number_pax=Sum('pax'))
         result_sunday = total_pax_sunday["number_pax"]
+
+        sunday_bookings = [['13:00', 1],
+                           ['13:00', 2],
+                           ['13:00', 3],
+                           ['13:00', 4],
+                           ]
+
+
         if result_sunday is None:
             result_sunday = 0
         return render(request, 'calendario/sunday.html',
                       {'result_sunday': result_sunday, 'date_of_day': date_of_day,
-                       'all_booking_of_sunday': all_booking_of_sunday,
+                       'all_booking_of_sunday': all_booking_of_sunday,'sunday_bookings': sunday_bookings,
                        'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
 
     return render(request, 'calendario/day.html',

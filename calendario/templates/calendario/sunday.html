@@ -15,24 +15,35 @@
 {% block content %}
     <h1 class="date_of_booking">Date : {{ booking_day|date:"d M Y" }}</h1>
     <h1 class="amount_of_pax">Booked : {{ result_sunday }} pax </h1>
+    {{ sunday_bookings }}
 
-{{all_booking_of_sunday }}
-    {% for booking in all_booking_of_sunday %}
-        {{ booking.time }};;;;;{{ booking.pax }}&nbsp;
-        {% for table in booking.tables.all %}
-            [{{ table.name }}]
+</br>
+    {% for x in sunday_bookings %}
+        {{ x.0 }}, {{ x.1 }} -
+        {% for booking in all_booking_of_sunday %}
+            {% for table in booking.tables.all %}
+                {% if table.id == x.1  %}
+                    {{ booking.time }};{{ booking.pax }}&nbsp;[{{ table.name }}]&nbsp;{{ booking.name }}
+                {% endif %}
+            {% endfor %}
         {% endfor %}
-    {% endfor %} &nbsp;
+</br></br></br>
+    {% endfor %}
+
 
     <h1></br>
         <a id="back_to_month" href="{% url 'index' %}">BACK TO MONTH</a>
         </br>
         </br>
         <h1 class="date_of_booking">FIRST SITTING</h1>
-        <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour=13:00&table=01&returnurl={{ request.get_full_path|urlencode }}">EDIT</a> Table: 01
+        <div class="times_of_booking">13:00<a class="add_booking"
+                                              href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour=13:00&table=01&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>
+            Table: 01
         </div>
         </br>
-        <div class="times_of_booking">13:00 <a class="add_booking" href="{% url 'new_booking' %}?date={{ date_of_day }}&hour=13:00&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>Table: 02
+        <div class="times_of_booking">13:00 <a class="add_booking"
+                                               href="{% url 'new_booking' %}?date={{ date_of_day }}&hour=13:00&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>Table:
+            02
         </div>
         </br>
         <div class="times_of_booking">13:00<a class="add_booking" href="{% url 'new_booking' %}">EDIT</a> Table: 03
