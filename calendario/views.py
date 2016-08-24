@@ -189,6 +189,20 @@ def new_booking_sunday(request):
     return render(request, 'calendario/new_booking.html', {'form': form})
 
 
+def booking_edit_sunday(request, pk):
+    post = get_object_or_404(SundayBooking, pk=pk)
+    if request.method == "POST":
+        form = PostFormSunday(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            form.save_m2m()
+            return redirect('index')  # TODO: make a better redirect
+    else:
+        form = PostFormSunday(instance=post)
+    return render(request, 'calendario/edit_booking.html', {'form': form})
+
+
 def new_booking(request):
     if request.method == "POST":
         form = PostForm(request.POST)
