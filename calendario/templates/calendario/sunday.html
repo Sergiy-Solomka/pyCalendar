@@ -28,7 +28,29 @@
             </div>
             {% for booking in all_booking_of_sunday %}
                 {% for table in booking.tables.all %}
-                    {% if table.id == x.1 %}
+                    {% if table.id == x.1 and booking.time == x.0%}
+                        <div class="times_of_booking">
+                            {{ booking.time }}&nbsp;<a
+                                class="add_booking"
+                                href="{% url 'booking_edit' pk=booking.pk %}">EDIT</a>&nbsp;Table: {{ x.1 }}&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}&nbsp;&nbsp;Pax:&nbsp;{{ booking.pax }}&nbsp;&nbsp;&nbsp;{{ booking.comments }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ booking.phone }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </br></br></br>
+        {% endfor %}
+
+         <h1 class="date_of_booking">SECOND SITTING</h1>
+
+        </br>
+        {% for x in sunday_bookings_second %}
+            <div class="times_of_booking">{{ x.0 }}&nbsp;<a class="add_booking"
+                                                            href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour={{ x.0 }}&table={{ x.1 }}&returnurl={{ request.get_full_path|urlencode }}">NEW</a>&nbsp;Table: {{ x.1 }}
+            </div>
+            {% for booking in all_booking_of_sunday %}
+                {% for table in booking.tables.all %}
+                    {% if table.id == x.1 and booking.time == x.0%}
                         <div class="times_of_booking">
                             {{ booking.time }}&nbsp;<a
                                 class="add_booking"
