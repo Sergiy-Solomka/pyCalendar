@@ -22,7 +22,7 @@
         <h1 class="date_of_booking">FIRST SITTING</h1>
 
         </br>
-        {% for x in sunday_bookings %}
+        {% for x in sunday_bookings_first %}
             <div class="times_of_booking">{{ x.0 }}&nbsp;<a class="add_booking"
                                                             href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour={{ x.0 }}&table={{ x.1 }}&returnurl={{ request.get_full_path|urlencode }}">NEW</a>&nbsp;Table: {{ x.1 }}
             </div>
@@ -32,7 +32,8 @@
                         <div class="times_of_booking">
                             {{ booking.time }}&nbsp;<a
                                 class="add_booking"
-                                href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour={{ x.0 }}&table={{ x.1 }}&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>&nbsp;Table: {{ x.1 }}&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}&nbsp;&nbsp;Pax:&nbsp;{{ booking.pax }}&nbsp;&nbsp;&nbsp;{{ booking.comments }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ booking.phone }}
+                                href="{% url 'booking_edit' pk=booking.pk %}">EDIT</a>&nbsp;Table: {{ x.1 }}&nbsp;&nbsp;Name:&nbsp;&nbsp;{{ booking.name }}&nbsp;&nbsp;Pax:&nbsp;{{ booking.pax }}&nbsp;&nbsp;&nbsp;{{ booking.comments }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ booking.phone }}
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -40,17 +41,6 @@
             </br></br></br>
         {% endfor %}
 
-
-
-        <div class="times_of_booking">13:00<a class="add_booking"
-                                              href="{% url 'new_booking_sunday' %}?date={{ date_of_day }}&hour=13:00&table=01&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>
-            Table: 01
-        </div>
-        </br>
-        <div class="times_of_booking">13:00 <a class="add_booking"
-                                               href="{% url 'new_booking' %}?date={{ date_of_day }}&hour=13:00&returnurl={{ request.get_full_path|urlencode }}">EDIT</a>Table:
-            02
-        </div>
 
     </h1>
 

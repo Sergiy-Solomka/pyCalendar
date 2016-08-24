@@ -96,7 +96,7 @@ def get_day_events(request):
             number_pax=Sum('pax'))
         result_sunday = total_pax_sunday["number_pax"]
 
-        sunday_bookings = [['13:00', 1],
+        sunday_bookings_first = [['13:00', 1],
                            ['13:00', 2],
                            ['13:00', 3],
                            ['13:00', 4],
@@ -131,7 +131,7 @@ def get_day_events(request):
             result_sunday = 0
         return render(request, 'calendario/sunday.html',
                       {'result_sunday': result_sunday, 'date_of_day': date_of_day,
-                       'all_booking_of_sunday': all_booking_of_sunday,'sunday_bookings': sunday_bookings,
+                       'all_booking_of_sunday': all_booking_of_sunday,'sunday_bookings_first': sunday_bookings_first,
                        'booking_day': datetime.datetime(day=int(day), month=int(month), year=int(year)).date()})
 
     return render(request, 'calendario/day.html',
